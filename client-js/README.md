@@ -37,8 +37,8 @@ const TuneupInput = () => {
     await tuneup.ask({
       question,
       // it will be fired every 1000ms (default) with the latest content.
-      onReceiveContent: (latest) => setAnsert(latest),
-      onCompleted: (last)=> {
+      onUpdate: (latest) => setAnsert(latest),
+      onComplete: (last)=> {
         // maybe set only once
       },
       collectionId,
