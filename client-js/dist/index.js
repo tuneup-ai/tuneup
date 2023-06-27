@@ -81,7 +81,7 @@ export var createClient = function (apiKey) {
             }
         });
     }); };
-    var polling = function (fragmentId, onReceiveContent, onCompleted) { return __awaiter(void 0, void 0, void 0, function () {
+    var polling = function (fragmentId, onUpdate, onComplete) { return __awaiter(void 0, void 0, void 0, function () {
         var data, output, output;
         var _a, _b, _c, _d;
         return __generator(this, function (_e) {
@@ -99,20 +99,20 @@ export var createClient = function (apiKey) {
                 case 4:
                     data = _e.sent();
                     output = (_b = data === null || data === void 0 ? void 0 : data.fragment) === null || _b === void 0 ? void 0 : _b.output;
-                    onReceiveContent(output || '');
+                    onUpdate === null || onUpdate === void 0 ? void 0 : onUpdate(output || '');
                     return [3 /*break*/, 2];
                 case 5:
                     if (!((_c = data === null || data === void 0 ? void 0 : data.fragment) === null || _c === void 0 ? void 0 : _c.updatingFrom)) {
                         output = ((_d = data === null || data === void 0 ? void 0 : data.fragment) === null || _d === void 0 ? void 0 : _d.output) || '';
-                        onReceiveContent(output);
-                        onCompleted && onCompleted(output);
+                        onUpdate === null || onUpdate === void 0 ? void 0 : onUpdate(output);
+                        onComplete === null || onComplete === void 0 ? void 0 : onComplete(output);
                     }
                     return [2 /*return*/];
             }
         });
     }); };
     var ask = function (_a) {
-        var question = _a.question, onReceiveContent = _a.onReceiveContent, onCompleted = _a.onCompleted, collectionId = _a.collectionId, _b = _a.model, model = _b === void 0 ? 'gpt-3.5-turbo' : _b;
+        var question = _a.question, collectionId = _a.collectionId, _b = _a.model, model = _b === void 0 ? 'gpt-3.5-turbo' : _b, onUpdate = _a.onUpdate, onComplete = _a.onComplete;
         return __awaiter(void 0, void 0, void 0, function () {
             var data, id;
             var _c;
@@ -130,7 +130,7 @@ export var createClient = function (apiKey) {
                             console.log('id not found');
                             return [2 /*return*/];
                         }
-                        return [4 /*yield*/, polling(id, onReceiveContent, onCompleted)];
+                        return [4 /*yield*/, polling(id, onUpdate, onComplete)];
                     case 2:
                         _d.sent();
                         return [2 /*return*/];

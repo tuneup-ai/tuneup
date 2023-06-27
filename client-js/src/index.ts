@@ -9,10 +9,10 @@ type CreateParams = {
 
 type AskParams = {
   question: string
-  onReceiveContent: (content: string) => void
-  onCompleted?: (content: string) => void
   collectionId: string
   model?: 'gpt-3.5-turbo' | 'gpt-4'
+  onUpdate?: (output: string) => void
+  onComplete?: (output: string) => void
 }
 
 const createHeaders = (apiKey: string) => ({
@@ -47,8 +47,8 @@ export const createClient = (apiKey: string)=> {
 
   const polling = async (
     fragmentId: string,
-    onReceiveContent: (content: string) => void,
-    onCompleted?: (content: string) => void
+    onUpdate?: (output: string) => void,
+    onComplete?: (output: string) => void
   ) => {
     let data = await read(fragmentId);
 
@@ -56,22 +56,22 @@ export const createClient = (apiKey: string)=> {
       await sleep(1000);
       data = await read(fragmentId);
       const output = data?.fragment?.output;
-      onReceiveContent(output || '');
+      onUpdate?.(output || '');
     }
 
     if (!data?.fragment?.updatingFrom) {
       const output = data?.fragment?.output || '';
-      onReceiveContent(output);
-      onCompleted && onCompleted(output);
+      onUpdate?.(output);
+      onComplete?.(output);
     }
   };
 
   const ask = async({
     question,
-    onReceiveContent,
-    onCompleted,
     collectionId,
-    model = 'gpt-3.5-turbo'
+    model = 'gpt-3.5-turbo',
+    onUpdate,
+    onComplete,
   }: AskParams) => {
 
     const data = await create({
@@ -86,7 +86,7 @@ export const createClient = (apiKey: string)=> {
       return
     }
 
-    await polling(id, onReceiveContent, onCompleted)
+    await polling(id, onUpdate, onComplete)
   }
 
   return {

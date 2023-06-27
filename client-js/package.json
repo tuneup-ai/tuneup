@@ -1,9 +1,15 @@
 {
   "name": "@tuneup/client-js",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Javascript client for tuneup",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "keywords": [
+    "tuneup",
+    "client",
+    "javascript",
+    "typescript"
+  ],
   "scripts": {
     "build": "tsc --outDir dist",
     "test:type": "tsc --noEmit --watch",

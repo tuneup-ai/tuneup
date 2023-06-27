@@ -17,8 +17,8 @@ describe('createClient', () => {
     it('should call create with the correct params', async () => {
       const client = createClient('apiKey')
 
-      const onReceiveContent = jest.fn()
-      const onCompleted = jest.fn()
+      const onUpdate = jest.fn()
+      const onComplete = jest.fn()
       const collectionId = 'collection-uuid'
 
       // create
@@ -39,13 +39,13 @@ describe('createClient', () => {
 
       await client.ask({
         question: 'question',
-        onReceiveContent,
-        onCompleted,
+        onUpdate,
+        onComplete,
         collectionId,
       })
 
-      expect(onReceiveContent).toHaveBeenCalledTimes(2)
-      expect(onCompleted).toHaveBeenCalledWith('output finished')
+      expect(onUpdate).toHaveBeenCalledTimes(2)
+      expect(onComplete).toHaveBeenCalledWith('output finished')
     })
   })
 
