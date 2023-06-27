@@ -4,6 +4,11 @@
   "description": "Javascript client for tuneup",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "homepage": "https://github.com/tuneup-ai/tuneup",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tuneup-ai/tuneup.git"
+  },
   "keywords": [
     "tuneup",
     "client",

@@ -2,7 +2,7 @@
 
 The Tuneup client library provides convenient access to the Tuneup API.
 
-See [API Documentaion]() for more access.
+See [API Documentaion](http://doc.tuneup.cc) for more access.
 
 ## Installation
 
