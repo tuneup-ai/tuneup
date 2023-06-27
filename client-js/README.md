@@ -1,4 +1,4 @@
-# @tuneup/client-js
+# [@tuneup/client-js](https://www.npmjs.com/package/@tuneup/client-js)
 
 The Tuneup client library provides convenient access to the Tuneup API.
 
